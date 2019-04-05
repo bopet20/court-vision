@@ -3,8 +3,7 @@ import Player from './Player'
 import PlayerContext from '../context/players-context'
 
 const PlayerResult = ({ player, setQuery }) => {
-  const { dispatch, getInfo } = useContext(PlayerContext)
-  const { name, position, team } = getInfo(player)
+  const { dispatch } = useContext(PlayerContext)
 
   const handleAdd = () => {
     dispatch({ type:'ADD_PLAYER', player })
