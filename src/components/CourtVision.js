@@ -14,11 +14,15 @@ const CourtVision = () => {
   })
 
   useEffect(() => {
-    const players = []
+    const players = JSON.parse(localStorage.getItem('players'))
     if (players) {
       dispatch({ type: 'POPULATE_PLAYERS', players })
     }
   }, [])
+
+  useEffect(() => {
+    localStorage.setItem('players', JSON.stringify(players))
+  }, [players])
 
   return (
     <PlayersContext.Provider value={{ players, dispatch, getInfo }}>
