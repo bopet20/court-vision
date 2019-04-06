@@ -35,7 +35,7 @@ const Search = () => {
     if(query.length > 2){
       getPlayer()
     }
-  }, [query])
+  }, [query, players])
 
   return (
     <div>
