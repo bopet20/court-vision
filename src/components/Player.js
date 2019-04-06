@@ -7,7 +7,8 @@ const Player = ({ player }) => {
 
   return (
     <>
-      <p>{`${team} ${name} - ${position.split('-').join(' ')}`}</p>
+      <p>{name}</p>
+      <p>{`${team}, ${position.split('-').join(' ')}`}</p>
     </>
   )
 }
