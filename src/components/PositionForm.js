@@ -17,7 +17,7 @@ const PositionForm = ({ player }) => {
           <input
             name="pg"
             type="checkbox"
-            checked={player.pg}
+            checked={player.positionBools.pg}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>
@@ -26,7 +26,7 @@ const PositionForm = ({ player }) => {
           <input
             name="sg"
             type="checkbox"
-            checked={player.sg}
+            checked={player.positionBools.sg}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>
@@ -35,7 +35,7 @@ const PositionForm = ({ player }) => {
           <input
             name="sf"
             type="checkbox"
-            checked={player.sf}
+            checked={player.positionBools.sf}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>
@@ -44,7 +44,7 @@ const PositionForm = ({ player }) => {
           <input
             name="pf"
             type="checkbox"
-            checked={player.pf}
+            checked={player.positionBools.pf}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>

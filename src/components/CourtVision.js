@@ -3,37 +3,10 @@ import playersReducer from '../reducers/players'
 import PlayersContext from '../context/players-context'
 import Search from './Search'
 import PlayerList from './PlayerList'
+import { createPositionString } from '../utils/utils'
 
 const CourtVision = () => {
   const [players, dispatch] = useReducer(playersReducer, [])
-
-  const getInfo = ({ id, first_name, last_name, position, team, pg, sg, sf, pf, c }) => {
-    if (pg || sg || sf || pf) {
-      position = ''
-      if (pg) {
-        position = position + 'PG-'
-      }
-      if (sg) {
-        position = position + 'SG-'
-      }
-      if (sf) {
-        position = position + 'SF-'
-      }
-      if (pf) {
-        position = position + 'PF-'
-      }
-      if (c) {
-        position = position + 'C'
-      }
-    }
-
-    return {
-      id,
-      name:`${first_name} ${last_name}`,
-      position,
-      team: team.abbreviation
-    }
-  }
 
   useEffect(() => {
     const players = JSON.parse(localStorage.getItem('players'))
@@ -45,6 +18,23 @@ const CourtVision = () => {
   useEffect(() => {
     localStorage.setItem('players', JSON.stringify(players))
   }, [players])
+
+  const getInfo = ({ id, first_name, last_name, position, team, positionBools }) => {
+    if (positionBools) {
+      const {pg, sg, sf, pf } = positionBools
+
+      if (pg || sg || sf || pf) {
+        position = createPositionString(positionBools)
+      }
+    }
+
+    return {
+      id,
+      name:`${first_name} ${last_name}`,
+      position,
+      team: team.abbreviation
+    }
+  }
 
   return (
     <PlayersContext.Provider value={{ players, dispatch, getInfo }}>

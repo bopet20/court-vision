@@ -16,7 +16,7 @@ const PlayerList = () => {
       {players.map((player) => (
         <React.Fragment key={player.id}>
           <Player player={player} />
-          <PositionForm player={player}/>
+          <PositionForm player={player} />
           <button onClick={() => handleRemove(player)}>X</button>
         </React.Fragment>
       ))}
