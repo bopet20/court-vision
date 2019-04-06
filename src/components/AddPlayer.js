@@ -6,7 +6,11 @@ const PlayerResult = ({ player, setQuery }) => {
   const { dispatch } = useContext(PlayerContext)
 
   const handleAdd = () => {
-    dispatch({ type:'ADD_PLAYER', player })
+    let positions = { pg: false, sg: false, sf: false, pf: false, c: false }
+    if (player.position.split('-').includes('C')) {
+      positions = {...positions, c: true}
+    }
+    dispatch({ type:'ADD_PLAYER', player: { ...player, ...positions } })
     setQuery('')
   }
 

@@ -7,11 +7,33 @@ import PlayerList from './PlayerList'
 const CourtVision = () => {
   const [players, dispatch] = useReducer(playersReducer, [])
 
-  const getInfo = ({ first_name, last_name, position, team }) => ({
-     name:`${first_name} ${last_name}`,
-     position,
-     team: team.abbreviation
-  })
+  const getInfo = ({ id, first_name, last_name, position, team, pg, sg, sf, pf, c }) => {
+    if (pg || sg || sf || pf) {
+      position = ''
+      if (pg) {
+        position = position + 'PG-'
+      }
+      if (sg) {
+        position = position + 'SG-'
+      }
+      if (sf) {
+        position = position + 'SF-'
+      }
+      if (pf) {
+        position = position + 'PF-'
+      }
+      if (c) {
+        position = position + 'C'
+      }
+    }
+
+    return {
+      id,
+      name:`${first_name} ${last_name}`,
+      position,
+      team: team.abbreviation
+    }
+  }
 
   useEffect(() => {
     const players = JSON.parse(localStorage.getItem('players'))

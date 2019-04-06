@@ -8,6 +8,17 @@ const playersReducer = (players, action) => {
       return players.filter((player) =>
         player.id !== action.player.id
       )
+    case 'UPDATE_PLAYER':
+      return players.map((player) => {
+        if (player.id === action.id) {
+          return {
+            ...player,
+            ...action.updates
+          }
+        } else {
+          return player
+        }
+      })
     default:
       return players
   }
