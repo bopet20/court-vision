@@ -28,7 +28,7 @@ const PlayerSchedule = ({ player, dates }) => {
       {games.map((game) => (
         <React.Fragment key={game}>
           <Player player={player} />
-          <p key={game}>{moment(game).format('MM/DD')}</p>
+          <p>{moment(game).format('MM/DD')}</p>
         </React.Fragment>
       ))}
     </div>
