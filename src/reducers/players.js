@@ -11,7 +11,7 @@ const playersReducer = (players, action) => {
     case 'UPDATE_PLAYER':
       return players.map((player) => {
         if (player.id === action.id) {
-          player.positionBools = {...player.positionBools, ...action.updates}
+          player.positionInfo = {...player.positionInfo, ...action.updates}
           return player
         } else {
           return player

@@ -7,7 +7,16 @@ const PositionForm = ({ player }) => {
   const updatePosition = (e, id) => {
     const position = e.target.name
     const value = e.target.checked
-    dispatch({ type:'UPDATE_PLAYER', id, updates: { [position]: value } })
+
+    // if checked, increment position counter
+    // else, decrement
+    let counter = player.positionInfo.counter
+    if (value) {
+      counter = counter + 1
+    } else {
+      counter = counter - 1
+    }
+    dispatch({ type:'UPDATE_PLAYER', id, updates: { [position]: value, counter } })
   }
 
   return (
@@ -17,7 +26,7 @@ const PositionForm = ({ player }) => {
           <input
             name="pg"
             type="checkbox"
-            checked={player.positionBools.pg}
+            checked={player.positionInfo.pg}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>
@@ -26,7 +35,7 @@ const PositionForm = ({ player }) => {
           <input
             name="sg"
             type="checkbox"
-            checked={player.positionBools.sg}
+            checked={player.positionInfo.sg}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>
@@ -35,7 +44,7 @@ const PositionForm = ({ player }) => {
           <input
             name="sf"
             type="checkbox"
-            checked={player.positionBools.sf}
+            checked={player.positionInfo.sf}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>
@@ -44,7 +53,7 @@ const PositionForm = ({ player }) => {
           <input
             name="pf"
             type="checkbox"
-            checked={player.positionBools.pf}
+            checked={player.positionInfo.pf}
             onChange={(e) => updatePosition(e, player.id)}
           />
         </label>

@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react'
 import playersReducer from '../reducers/players'
 import PlayersContext from '../context/players-context'
+import Header from './Header'
 import Search from './Search'
 import PlayerList from './PlayerList'
 import ScheduleOverview from './ScheduleOverview'
@@ -22,10 +23,12 @@ const CourtVision = () => {
 
   return (
     <PlayersContext.Provider value={{ players, dispatch, getInfo }}>
-      <h1>Court Vision</h1>
-      <ScheduleOverview />
-      <PlayerList />
-      <Search />
+      <Header />
+      <div className="content-container">
+        <Search />
+        <PlayerList />
+        <ScheduleOverview />
+      </div>
     </PlayersContext.Provider>
   )
 }

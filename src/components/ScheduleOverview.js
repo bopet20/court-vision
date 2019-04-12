@@ -1,16 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import { DateRangePicker } from 'react-dates'
-import PlayersContext from '../context/players-context'
-import PlayerSchedule from './PlayerSchedule'
+import DailyScheduleList from './DailyScheduleList'
 
 const ScheduleOverview = () => {
-  const { players } = useContext(PlayersContext)
-  const [dates, setDates] = useState({
-    startDate: moment().startOf('week').add(1, 'day'),
-    endDate: moment().endOf('week').add(1, 'day')
-  })
+  const [dates, setDates] = useState({startDate: undefined, endDate: undefined})
   const [focus, setFocus] = useState(null)
+
+  useEffect(() => {
+    setDates({
+      startDate: moment().startOf('isoWeek'),
+      endDate: moment().endOf('isoWeek').subtract(8, 'hours')
+    })
+  }, [])
 
   const onDatesChange = ({ startDate, endDate }) => {
     setDates({ startDate, endDate })
@@ -30,13 +32,13 @@ const ScheduleOverview = () => {
         onDatesChange={onDatesChange}
         focusedInput={focus}
         onFocusChange={onFocusChange}
-        numberOfMonths={1}
         isOutsideRange={() => false}
-        showClearDates={true}
+        firstDayOfWeek={1}
       />
-      {players.map((player) => (
+      <DailyScheduleList dates={dates} />
+      {/* {players.map((player) => (
         <PlayerSchedule key={player.id} player={player} dates={dates}/>
-      ))}
+      ))} */}
     </div>
   )
 }

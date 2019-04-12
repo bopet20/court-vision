@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import PlayersContext from '../context/players-context'
 import Player from './Player'
 import PositionForm from './PositionForm'
+import { alphabetical } from '../utils/utils'
 
 const PlayerList = () => {
   const { players, dispatch } = useContext(PlayersContext)
@@ -13,12 +14,12 @@ const PlayerList = () => {
   return (
     <div>
       <p>Your team</p>
-      {players.map((player) => (
-        <React.Fragment key={player.id}>
+      {players.sort(alphabetical).map((player) => (
+        <div className="player-card" key={player.id}>
           <Player player={player} />
           <PositionForm player={player} />
           <button onClick={() => handleRemove(player)}>X</button>
-        </React.Fragment>
+        </div>
       ))}
     </div>
   )

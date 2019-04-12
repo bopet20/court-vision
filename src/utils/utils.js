@@ -1,11 +1,11 @@
 import moment from 'moment'
 
-const getInfo = ({ id, first_name, last_name, position, team, positionBools }) => {
-  if (positionBools) {
-    const {pg, sg, sf, pf } = positionBools
+const getInfo = ({ id, first_name, last_name, position, team, positionInfo }) => {
+  if (positionInfo) {
+    const {pg, sg, sf, pf } = positionInfo
 
     if (pg || sg || sf || pf) {
-      position = createPositionString(positionBools)
+      position = createPositionString(positionInfo)
     }
   }
 
@@ -37,14 +37,34 @@ const createPositionString = ({ pg, sg, sf, pf, c }) => {
   return position
 }
 
-const createScheduleURL = (teamId, dates) => {
+const createScheduleURL = (teamIds, dates) => {
   let url = `https://www.balldontlie.io/api/v1/games?seasons[]=2018`
-  const teamIdQuery = `&team_ids[]=${teamId}`
+  let teamIdsQuery = ''
+  teamIds.forEach((teamId) => {
+    teamIdsQuery = teamIdsQuery + `&team_ids[]=${teamId}`
+  })
   const startDate = moment(dates.startDate).format('YYYY-MM-DD')
   const endDate = moment(dates.endDate).format('YYYY-MM-DD')
   const datesQuery = `&start_date=${startDate}&end_date=${endDate}`
 
-  return url + teamIdQuery + datesQuery
+  return url + teamIdsQuery + datesQuery
 }
 
-export { getInfo, createPositionString, createScheduleURL }
+// Alphabetical sort compare function
+const alphabetical = (a,b) => {
+  if (a.first_name > b.first_name) {
+    return 1
+  } else if (a.first_name < b.first_name) {
+    return -1
+  } else {
+    if (a.last_name > b.last_name) {
+      return 1
+    } else if (a.last_name < b.last_name) {
+      return -1
+    } else {
+      return 0
+    }
+  }
+}
+
+export { getInfo, createPositionString, createScheduleURL, alphabetical }

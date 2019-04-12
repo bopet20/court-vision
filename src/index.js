@@ -4,6 +4,7 @@ import CourtVision from './components/CourtVision';
 import * as serviceWorker from './serviceWorker';
 import 'react-dates/lib/css/_datepicker.css'
 import 'react-dates/initialize'
+import './styles/styles.scss'
 
 ReactDOM.render(<CourtVision />, document.getElementById('root'));
 

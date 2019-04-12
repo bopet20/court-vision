@@ -6,13 +6,13 @@ const PlayerResult = ({ player, setQuery }) => {
   const { dispatch } = useContext(PlayerContext)
 
   const handleAdd = () => {
-    let positionBools = { pg: false, sg: false, sf: false, pf: false, c: false }
+    let positionInfo = { pg: false, sg: false, sf: false, pf: false, c: false, counter: 0 }
 
     if (player.position.split('-').includes('C')) {
-      positionBools = {...positionBools, c: true}
+      positionInfo = { ...positionInfo, c: true, counter: 1 }
     }
 
-    dispatch({ type:'ADD_PLAYER', player: { ...player, positionBools } })
+    dispatch({ type:'ADD_PLAYER', player: { ...player, positionInfo } })
     setQuery('')
   }
 
