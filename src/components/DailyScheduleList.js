@@ -7,10 +7,6 @@ import { createScheduleURL } from '../utils/utils'
 const DailyScheduleList = ({ dates }) => {
   const { players } = useContext(PlayersContext)
   const [schedules, setSchedules] = useState([])
-    // need to sort games into correct dates
-  // instead of player: gameDates
-  // should be date: players
-  // schedule = { players, date }
 
   useEffect(() => {
     let teamIds = []
@@ -53,35 +49,33 @@ const DailyScheduleList = ({ dates }) => {
     }
 
     const games = await getGames(teamIds)
-    console.log(games)
     games.forEach((game) => {
       const daysDiff = Math.ceil(moment.duration(moment(game.date).diff(startDate)).as('days'))
       players.forEach((player) => {
         // TODO: Refactor along with getInfo
         const onHomeTeam = player.team.abbreviation === game.homeTeam
         const onAwayTeam = player.team.abbreviation === game.awayTeam
-        console.log(onAwayTeam)
         if (onHomeTeam || onAwayTeam) {
+          const opponentString = onHomeTeam ? `vs. ${game.awayTeam}` : `@${game.homeTeam}`
           const playerAndGame = {
             ...game,
             player: {
               name: `${player.first_name} ${player.last_name}`,
               positionInfo: player.positionInfo,
-              team: player.team.abbreviation
+              team: player.team.abbreviation,
+              opponentString
             }
           }
-          console.log(playerAndGame)
           newSchedules[daysDiff].players.push(playerAndGame)
         }
       })
     })
-    console.log(newSchedules)
     setSchedules(newSchedules)
   }
 
   return (
     <div className="content-container">
-      <DailySchedule />
+      {/* <DailySchedule /> */}
       {schedules.map((schedule, index) => (
         <DailySchedule key={schedule.date + `${index}`} schedule={schedule} />
       ))}

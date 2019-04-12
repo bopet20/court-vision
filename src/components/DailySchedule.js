@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Bench from './Bench'
 
 const DailySchedule = ({ schedule = [] }) => {
   const { players, date } = schedule
@@ -26,31 +27,30 @@ const DailySchedule = ({ schedule = [] }) => {
         ))
         let newStarters = { ...defaultStarters }
         sortedPlayers.forEach(({ player }) => {
-          const { name } = player
           const { pg, sg, sf, pf, c } = player.positionInfo
 
           if (pg && !newStarters.pg) {
-            newStarters.pg = name
+            newStarters.pg = player
           } else if (sg && !newStarters.sg) {
-            newStarters.sg = name
+            newStarters.sg = player
           } else if ((pg || sg) && !newStarters.g) {
-            newStarters.g = name
+            newStarters.g = player
           } else if (sf && !newStarters.sf) {
-            newStarters.sf = name
+            newStarters.sf = player
           } else if (pf && !newStarters.pf) {
-            newStarters.pf = name
+            newStarters.pf = player
           } else if ((sf || pf) && !newStarters.f) {
-            newStarters.f = name
+            newStarters.f = player
           } else if (c && !newStarters.c1) {
-            newStarters.c1 = name
+            newStarters.c1 = player
           } else if (c && !newStarters.c2) {
-            newStarters.c2 = name
+            newStarters.c2 = player
           } else if (!newStarters.u1) {
-            newStarters.u1 = name
+            newStarters.u1 = player
           } else if (!newStarters.u2) {
-            newStarters.u2 = name
+            newStarters.u2 = player
           } else {
-            newStarters.bn = [...newStarters.bn, name]
+            newStarters.bn = [...newStarters.bn, player]
           }
         })
         setStarters(newStarters)
@@ -64,7 +64,19 @@ const DailySchedule = ({ schedule = [] }) => {
       <p>{date ? date : 'Position'}</p>
       {
         Object.keys(starters).map((position, index) => (
-          <p key={`${starters[position]} ${index}`}>{starters[position] ? `${starters[position]}` : `${position.toUpperCase()}`}</p>
+          <React.Fragment key={`${starters[position]} ${index}`}>
+            {starters[position] ?
+              position === 'bn' ?
+              <Bench bench={starters[position]}/>
+              :
+              <div>
+                <p>{`${starters[position].name}, ${starters[position].team}`}</p>
+                <p>{starters[position].opponentString}</p>
+              </div>
+             :
+             <p>{`${position.toUpperCase()}`}</p>
+             }
+          </React.Fragment>
         ))
       }
     </div>
