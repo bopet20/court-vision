@@ -14,13 +14,26 @@ const ScheduleOverview = () => {
     })
   }, [])
 
-  const onDatesChange = ({ startDate, endDate }) => {
-    setDates({ startDate, endDate })
-  }
-
   const onFocusChange = (focusedInput) => {
     setFocus(focusedInput)
   }
+
+  const maximumDays = 6
+  const isBeforeStart = (day) => day.isBefore(dates.startDate)
+  const isAfterMaxDays = (day) => day.isAfter(dates.startDate.clone().add(maximumDays, 'days'))
+
+  const onDatesChange = ({ startDate, endDate }) => {
+    if (endDate) {
+      if (isAfterMaxDays(endDate)) {
+        endDate = startDate.clone().add(maximumDays,'days')
+      }
+    }
+    setDates({ startDate, endDate })
+  }
+
+  const isOutsideRange = (day) => (
+    focus === 'endDate' && (isBeforeStart(day) || isAfterMaxDays(day))
+  )
 
   return (
     <div>
@@ -32,13 +45,10 @@ const ScheduleOverview = () => {
         onDatesChange={onDatesChange}
         focusedInput={focus}
         onFocusChange={onFocusChange}
-        isOutsideRange={() => false}
+        isOutsideRange={isOutsideRange}
         firstDayOfWeek={1}
       />
       <DailyScheduleList dates={dates} />
-      {/* {players.map((player) => (
-        <PlayerSchedule key={player.id} player={player} dates={dates}/>
-      ))} */}
     </div>
   )
 }

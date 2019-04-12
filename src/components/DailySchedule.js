@@ -66,13 +66,15 @@ const DailySchedule = ({ schedule = [] }) => {
         Object.keys(starters).map((position, index) => (
           <React.Fragment key={`${starters[position]} ${index}`}>
             {starters[position] ?
-              position === 'bn' ?
-              <Bench bench={starters[position]}/>
-              :
-              <div>
-                <p>{`${starters[position].name}, ${starters[position].team}`}</p>
-                <p>{starters[position].opponentString}</p>
-              </div>
+              (
+                position === 'bn' ?
+                <Bench bench={starters[position]}/>
+                :
+                <div>
+                  <p>{`${starters[position].name}, ${starters[position].team}`}</p>
+                  <p>{starters[position].opponentString}</p>
+                </div>
+              )
              :
              <p>{`${position.toUpperCase()}`}</p>
              }

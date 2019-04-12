@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Bench = ({ bench }) => {
-  console.log(bench)
   return (
     <div>
       {

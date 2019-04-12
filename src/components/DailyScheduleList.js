@@ -75,7 +75,7 @@ const DailyScheduleList = ({ dates }) => {
 
   return (
     <div className="content-container">
-      {/* <DailySchedule /> */}
+      <DailySchedule />
       {schedules.map((schedule, index) => (
         <DailySchedule key={schedule.date + `${index}`} schedule={schedule} />
       ))}
