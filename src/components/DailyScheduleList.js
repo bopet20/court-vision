@@ -39,10 +39,10 @@ const DailyScheduleList = ({ dates }) => {
   }
 
   const createSchedule = async (teamIds, { startDate, endDate }) => {
-    // Add a second, otherwise, endDate - startDate results in one less day
-    endDate = endDate.add(1, 'second')
+    // Add two hours, otherwise, endDate - startDate sometimes results in one less day
+    endDate = endDate.add(2, 'hour')
     // Difference between startDate and endDate as days rounded up
-    const amountOfDays = Math.ceil(moment.duration(endDate.add(0, 'day').diff(startDate)).as('days'))
+    const amountOfDays = Math.ceil(moment.duration(endDate.diff(startDate)).as('days'))
     let newSchedules = []
     for (let i = 0; i < amountOfDays; i++) {
       newSchedules.push({ date: moment(startDate).add(i, 'd').format('MMM D'), players: [] })
@@ -74,7 +74,7 @@ const DailyScheduleList = ({ dates }) => {
   }
 
   return (
-    <div className="content-container">
+    <div>
       <DailySchedule />
       {schedules.map((schedule, index) => (
         <DailySchedule key={schedule.date + `${index}`} schedule={schedule} />
