@@ -45,7 +45,7 @@ const createPositionString = ({ pg, sg, sf, pf, c }) => {
 }
 
 const createScheduleURL = (teamIds, dates) => {
-  let url = `https://www.balldontlie.io/api/v1/games?seasons[]=2018`
+  let url = `https://www.balldontlie.io/api/v1/games?seasons[]=2018&per_page=50`
   let teamIdsQuery = ''
   teamIds.forEach((teamId) => {
     teamIdsQuery = teamIdsQuery + `&team_ids[]=${teamId}`
