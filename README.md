@@ -1,7 +1,7 @@
 # Court Vision
 
 [Court Vision](https://courtvision.netlify.com) is a web app for assessing fantasy basketball schedules.
-Never have players with games in your bench again.
+Never have players with games on your bench again.
 This app uses the [balldontlie API](https://www.balldontlie.io) for its data.
 
 ## Background
