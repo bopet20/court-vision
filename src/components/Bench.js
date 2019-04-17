@@ -11,7 +11,7 @@ const Bench = ({ bench }) => {
         <div>
           {
             bench.map((player) => (
-              <CalendarPlayer player={player} />
+              <CalendarPlayer key={player} player={player} />
             ))
           }
         </div>

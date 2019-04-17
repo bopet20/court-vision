@@ -1,9 +1,8 @@
 .search {
   position: relative;
   display: inline-block;
-  // padding: $m-size;
   text-align: center;
-  margin: auto 0;
+  margin: auto $m-size;
   width: 20%;
   z-index: 1;
 

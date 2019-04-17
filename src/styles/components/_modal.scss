@@ -1,0 +1,74 @@
+.text-container {
+  max-width: 80%;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-size: $font-size-s;
+
+  & > * {
+    margin: 0;
+  }
+
+  ul {
+    padding: $s-size;;
+  }
+
+  p {
+    padding: $s-size 0;
+  }
+}
+
+.help-modal {
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+  margin: 0 auto;
+  max-width: 50%;
+  // max-height: 90%;
+
+  &__header {
+    @extend .player-list__header;
+  }
+
+  &__title {
+    @extend .header__title;
+    font-size: 200%;
+  }
+
+  &__text-header {
+    font-size: $font-size-m;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__content {
+    color: $dark-orange-font;
+    padding: 0;
+    background: $light-orange;
+    box-shadow: $box-shadow;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+
+    button {
+      margin: $s-size auto;
+      font-size: $font-size-m;
+      padding: $s-size;
+    }
+
+    .important {
+      font-weight: bold;
+      font-size: $font-size-xl;
+      text-align: center;
+      padding: $s-size;
+      margin: 0;
+    }
+  }
+}
+
+.ReactModal__Overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
