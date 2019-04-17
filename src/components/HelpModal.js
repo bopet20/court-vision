@@ -14,7 +14,7 @@ const HelpModal = ({ modalVisible, setVisibility }) => {
         <h1 className="help-modal__title">Court Vision</h1>
       </header>
       <main className="help-modal__content">
-        <p class="important">Never have players with games on your bench again.</p>
+        <p className="important">Never have players with games on your bench again.</p>
         <div className="text-container">
           <h2 className="help-modal__text-header">What is It?</h2>
           <p>Court Vision is a web app for assessing fantasy basketball schedules.
