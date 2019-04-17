@@ -1,0 +1,35 @@
+.schedule-overview {
+  width: 70%;
+  padding-bottom: $m-size;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $orange;
+    text-align: center;
+    padding: $xs-size;
+    border-top: 6px solid lighten($orange, 10%);
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 0;
+    margin: $s-size 0 0 0;
+  }
+
+  &__title {
+    margin: 0;
+    color: $white;
+    text-shadow: $text-shadow;
+    font-size: $font-size-l;
+    font-weight: bold;
+    flex-grow: 1;
+  }
+
+  &__playoffs {
+    display: inline;
+    color: white;
+    font-size: $font-size-s;
+    text-shadow: $text-shadow;
+    margin-right: $s-size;
+  }
+}
+

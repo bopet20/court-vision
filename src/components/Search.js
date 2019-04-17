@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
 import PlayersContext from '../context/players-context'
-import AddPlayer from './AddPlayer'
+import Player from './Player'
 
 const Search = () => {
-  const { players } = useContext(PlayersContext)
+  const { players, dispatch } = useContext(PlayersContext)
   const [results, setResults] = useState([])
   const [query, setQuery] = useState('')
+  const [focus, setFocus] = useState(false)
 
   useEffect(() => {
     const getPlayer = async () => {
-      // sometimes, the player we want isn't included in the default per_page=25
+      // Sometimes, the player we want isn't included in the default per_page=25
       const response = await fetch(`https://www.balldontlie.io/api/v1/players/?search=${query}&per_page=50`)
 
       if (response.ok) {
@@ -34,23 +35,57 @@ const Search = () => {
     }
     if(query.length > 2){
       getPlayer()
+    } else {
+      setResults([])
     }
   }, [query, players])
 
+  const handleAdd = (player) => {
+    let positionInfo = { pg: false, sg: false, sf: false, pf: false, c: false, counter: 0 }
+    const positions = player.position.split('-')
+
+    if (positions.includes('C')) {
+      positionInfo = { ...positionInfo, c: true, counter: 1 }
+    }
+
+    dispatch({ type:'ADD_PLAYER', player: { ...player, positionInfo } })
+    setQuery('')
+  }
+
   return (
-    <div>
-      <input
-      type="text"
-      value={query}
-      placeholder="Search for players"
-      onChange={(e) => {
-        setQuery(e.target.value)
+    <div
+      className="search"
+      tabIndex="0"
+      onBlur={(e) => {
+        if (e.relatedTarget === null || e.relatedTarget.className !== 'search') {
+          setFocus(false)
+        }
       }}
+    >
+      <span className="search-icon"/>
+      <input
+        className="search__input"
+        type="search"
+        value={query}
+        placeholder="Add players"
+        onChange={(e) => {
+          setQuery(e.target.value)
+        }}
+        onFocus={() => setFocus(true)}
       />
-      <p>Results:</p>
-      {query.length > 2 && results.map((player) => (
-        <AddPlayer key={player.id} player={player} setQuery={setQuery}/>
-      ))}
+        {focus && results.length > 0 &&
+          (<div className="search__results">
+            <p className="search__header">Add Player</p>
+            {results.map((player) => (
+              <div
+                className="search__result"
+                key={player.id}
+                onClick={() => handleAdd(player)}
+              >
+                <Player search player={player}/>
+              </div>
+            ))}
+          </div>)}
     </div>
   )
 }

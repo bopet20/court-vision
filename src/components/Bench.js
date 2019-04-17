@@ -1,19 +1,17 @@
 import React from 'react'
+import CalendarPlayer from './CalendarPlayer'
 
 const Bench = ({ bench }) => {
   return (
     <div>
       {
         bench.length === 0 ?
-        <p>BN</p>
+        <p>-</p>
         :
         <div>
           {
             bench.map((player) => (
-              <React.Fragment key={`${player.name} ${player.opponentString}`}>
-                <p>{`${player.name}, ${player.team}`}</p>
-                <p>{player.opponentString}</p>
-              </React.Fragment>
+              <CalendarPlayer player={player} />
             ))
           }
         </div>

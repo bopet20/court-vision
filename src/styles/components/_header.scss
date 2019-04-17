@@ -1,0 +1,19 @@
+.header {
+  background: $orange;
+  margin: 0;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+
+  &__content {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &__title {
+    font-family: Graduate, Arial, Helvetica, sans-serif;
+    font-size: 250%;
+    text-shadow: $text-shadow;
+    margin: 0;
+    padding: $xs-size;
+    color: $white;
+  }
+}

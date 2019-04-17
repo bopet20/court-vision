@@ -2,7 +2,6 @@ import React, { useEffect, useReducer } from 'react'
 import playersReducer from '../reducers/players'
 import PlayersContext from '../context/players-context'
 import Header from './Header'
-import Search from './Search'
 import PlayerList from './PlayerList'
 import ScheduleOverview from './ScheduleOverview'
 import { getInfo } from '../utils/utils'
@@ -24,8 +23,7 @@ const CourtVision = () => {
   return (
     <PlayersContext.Provider value={{ players, dispatch, getInfo }}>
       <Header />
-      <div className="content-container">
-        <Search />
+      <div className="content-container content-container--flex">
         <PlayerList />
         <ScheduleOverview />
       </div>

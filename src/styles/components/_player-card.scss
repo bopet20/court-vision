@@ -1,6 +1,29 @@
 .player-card {
   display: flex;
-  p {
-    margin: 0
+  flex-direction: column;
+  align-items: center;
+  padding: $s-size 0 $s-size 0;
+
+  &__name {
+    margin: 0;
+    font-weight: bold;
+  }
+
+  &__team {
+    font-size: 75%;
+    font-weight: normal;
+  }
+
+  &__positions {
+    display: block;
+    text-align: center;
+    margin: 0;
+    font-size: 90%;
+    font-weight: normal;
+
+    &--search {
+      display: inline;
+      font-size: 80%;
+    }
   }
 }

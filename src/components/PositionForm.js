@@ -21,43 +21,47 @@ const PositionForm = ({ player }) => {
 
   return (
     <form>
-      <label>
-          PG
+      <div>
+        <label>
           <input
             name="pg"
             type="checkbox"
             checked={player.positionInfo.pg}
             onChange={(e) => updatePosition(e, player.id)}
           />
+          PG
         </label>
         <label>
-          SG
           <input
             name="sg"
             type="checkbox"
             checked={player.positionInfo.sg}
             onChange={(e) => updatePosition(e, player.id)}
           />
+          SG
         </label>
-        <label>
-          SF
+      </div>
+      <div>
+      <label>
           <input
             name="sf"
             type="checkbox"
             checked={player.positionInfo.sf}
             onChange={(e) => updatePosition(e, player.id)}
           />
+          SF
         </label>
         <label>
-          PF
           <input
             name="pf"
             type="checkbox"
             checked={player.positionInfo.pf}
             onChange={(e) => updatePosition(e, player.id)}
           />
+          PF
         </label>
-      </form>
+      </div>
+    </form>
     )
 }
 

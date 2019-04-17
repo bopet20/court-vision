@@ -9,9 +9,16 @@ const getInfo = ({ id, first_name, last_name, position, team, positionInfo }) =>
     }
   }
 
+  let name = `${first_name} ${last_name}`
+  if (name === 'Shai Gilgeous-Alexander') {
+    name = 'S. Gilgeous-Alexander'
+  } else if (name === 'Giannis Antetokounmpo') {
+    name = 'G. Antetokounmpo'
+  }
+
   return {
     id,
-    name:`${first_name} ${last_name}`,
+    name,
     position,
     team: team.abbreviation
   }

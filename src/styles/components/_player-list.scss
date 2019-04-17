@@ -1,0 +1,54 @@
+.player-list {
+  color: $dark-orange-font;
+  margin-bottom: $m-size;
+
+  &__header {
+    color: $white;
+    background: $orange;
+    text-align: center;
+    padding: $s-size;
+    border-top: 6px solid lighten($orange, 10%);
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 0;
+    font-size: $font-size-l;
+    font-weight: bold;
+    margin: $s-size 0 0 0;
+    box-shadow: $box-shadow;
+    text-shadow: $text-shadow;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background: $light-orange;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+  }
+
+  &__player {
+    padding: 0 0 0 $s-size;
+    flex-grow: 1;
+  }
+
+  &__edit {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    font-size: 80%;
+    padding: 0 $s-size;
+    margin: auto 0;
+
+    label, input {
+      cursor: pointer;
+    }
+  }
+
+  &__message {
+    background: $light-orange;
+    margin: 0;
+    padding: $s-size;
+    font-weight: bold;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.18);
+    text-align: center;
+  }
+}

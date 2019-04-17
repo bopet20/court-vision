@@ -12,15 +12,33 @@ const PlayerList = () => {
   }
 
   return (
-    <div>
-      <p>Your team</p>
-      {players.sort(alphabetical).map((player) => (
-        <div className="player-card" key={player.id}>
-          <Player player={player} />
-          <PositionForm player={player} />
-          <button onClick={() => handleRemove(player)}>X</button>
-        </div>
-      ))}
+    <div className="player-list">
+      <h1 className="player-list__header">Your Team</h1>
+      <div className="player-list__list">
+        {players.length !== 0 ?
+          players.sort(alphabetical).map((player) => (
+            <div className="player-list__content" key={player.id}>
+              <div className="player-list__player">
+                <Player player={player} />
+              </div>
+              <div className="player-list__edit">
+                <PositionForm player={player} />
+                <button
+                  className="button"
+                  onClick={() => handleRemove(player)}
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          ))
+        :
+          <div className="player-list__message">
+            <p>Your team is empty.</p>
+            <p>Add some players to get started!</p>
+          </div>
+        }
+      </div>
     </div>
   )
 }

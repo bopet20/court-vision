@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $font-size-s;
+  line-height: 1.4;
+  margin: 0;
+}
+
+
+.is-active {
+    font-weight: bold;
+}

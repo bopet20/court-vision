@@ -57,10 +57,17 @@ const DailyScheduleList = ({ dates }) => {
         const onAwayTeam = player.team.abbreviation === game.awayTeam
         if (onHomeTeam || onAwayTeam) {
           const opponentString = onHomeTeam ? `vs. ${game.awayTeam}` : `@${game.homeTeam}`
+          let name = `${player.first_name.split('')[0]}. ${player.last_name}`
+          if (name === 'S. Gilgeous-Alexander') {
+            name = 'SGA'
+          } else if (name === 'G. Antetokounmpo') {
+            name = 'Greek Freak'
+          }
           const playerAndGame = {
             ...game,
             player: {
-              name: `${player.first_name} ${player.last_name}`,
+              // name is first initial and last name
+              name,
               positionInfo: player.positionInfo,
               team: player.team.abbreviation,
               opponentString
@@ -74,8 +81,8 @@ const DailyScheduleList = ({ dates }) => {
   }
 
   return (
-    <div>
-      <DailySchedule />
+    <div className="daily-schedule-list">
+      <DailySchedule headers />
       {schedules.map((schedule, index) => (
         <DailySchedule key={schedule.date + `${index}`} schedule={schedule} />
       ))}

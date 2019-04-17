@@ -1,6 +1,11 @@
+@import './base/settings';
+@import './base/base';
 @import './components/player-card';
 @import './components/content-container';
-
-* {
-  box-sizing: border-box;
-}
+@import './components/daily-schedule';
+@import './components/header';
+@import './components/player-list';
+@import './components/search';
+@import './components/schedule-overview';
+@import './components/button';
+@import './components/react_dates_overrides'

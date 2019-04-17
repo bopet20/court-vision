@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import CalendarPlayer from './CalendarPlayer'
 import Bench from './Bench'
 
-const DailySchedule = ({ schedule = [] }) => {
+const DailySchedule = ({ schedule = [], headers }) => {
   const { players, date } = schedule
   const defaultStarters = {
     pg: undefined,
@@ -59,26 +60,38 @@ const DailySchedule = ({ schedule = [] }) => {
     fillPositions()
   }, [players])
 
+  const setClassName = () => {
+    if (headers) {
+      return 'daily-schedule daily-schedule--headers'
+    } else if (starters.bn.length !== 0) {
+      return 'daily-schedule daily-schedule--alert'
+    } else {
+      return 'daily-schedule'
+    }
+  }
+
   return (
-    <div>
-      <p>{date ? date : 'Position'}</p>
+    <div className={setClassName()}>
+      <p className="daily-schedule__item daily-schedule__item--date">
+        {date ? date : 'Pos'}
+      </p>
       {
         Object.keys(starters).map((position, index) => (
-          <React.Fragment key={`${starters[position]} ${index}`}>
+          <div className="daily-schedule__item" key={`${starters[position]} ${index}`}>
             {starters[position] ?
               (
                 position === 'bn' ?
-                <Bench bench={starters[position]}/>
+                  headers ?
+                    <p>BN</p>
+                    :
+                    <Bench bench={starters[position]}/>
                 :
-                <div>
-                  <p>{`${starters[position].name}, ${starters[position].team}`}</p>
-                  <p>{starters[position].opponentString}</p>
-                </div>
+                <CalendarPlayer player={starters[position]} />
               )
              :
-             <p>{`${position.toUpperCase()}`}</p>
+              <p>{headers ? `${position.toUpperCase()}` : '-'}</p>
              }
-          </React.Fragment>
+          </div>
         ))
       }
     </div>
